@@ -26,10 +26,10 @@ public class StudentService implements IStudentService {
     }
 
     @Override
-    public Student GetById(Long id) {
+    public Optional<Student> getById(Long id) {
         Optional<Student> student = studentRepository.findById(id);
         if(student.isPresent()) {
-            return student.get();
+            return student;
         }
         throw new EntityNotFoundException("No Student found");
     }
@@ -59,7 +59,7 @@ public class StudentService implements IStudentService {
             student.setName(newStudent.getName());
             student.setAge(newStudent.getAge());
             student.setEmail(newStudent.getEmail());
-            student.setBirthDay(newStudent.getBirthDay());
+            student.setBirthday(newStudent.getBirthday());
         }
 
         try {

@@ -14,7 +14,7 @@ public class Student {
     private String name;
     private int age;
     private String email;
-    private Date birthDay;
+    private Date birthday;
 
 
     public Long getId() {
@@ -49,12 +49,12 @@ public class Student {
         this.email = email;
     }
 
-    public Date getBirthDay() {
-        return birthDay;
+    public Date getBirthday() {
+        return birthday;
     }
 
-    public void setBirthDay(Date birthDay) {
-        this.birthDay = birthDay;
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
 
     public boolean checkValidEntity() {
@@ -74,7 +74,7 @@ public class Student {
             return false;
         }
 
-        if(this.birthDay != null) {
+        if(this.birthday == null) {
             return false;
         }
 
