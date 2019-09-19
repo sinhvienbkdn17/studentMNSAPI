@@ -44,4 +44,25 @@ public class StudentController {
         }
         return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @PutMapping
+    public ResponseEntity edit(@RequestBody Student student) {
+        if (student.checkValidEntity()) {
+            if (studentService.edit(student)) {
+                return new ResponseEntity(HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity delete(@PathVariable(value = "id") Long Id) {
+        Optional<Student> student = studentService.getById(Id);
+        if(student.isPresent()){
+            if(studentService.delete(Id)){
+                return new ResponseEntity(HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }
