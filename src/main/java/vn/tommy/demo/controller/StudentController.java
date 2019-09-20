@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/student")
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("*")
 public class StudentController {
     @Autowired
     StudentService studentService;
@@ -47,11 +47,16 @@ public class StudentController {
 
     @PutMapping
     public ResponseEntity edit(@RequestBody Student student) {
-        if (student.checkValidEntity()) {
-            if (studentService.edit(student)) {
-                return new ResponseEntity(HttpStatus.OK);
+        try {
+            if (student.checkValidEntity()) {
+                if (studentService.edit(student)) {
+                    return new ResponseEntity(HttpStatus.OK);
+                }
             }
+        }catch (Exception ex) {
+            System.out.println(ex.getMessage());
         }
+
         return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
